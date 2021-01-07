@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct User {
+    let email: String
+    let avatar_url: String
+}

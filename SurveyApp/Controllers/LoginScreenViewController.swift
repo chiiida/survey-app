@@ -106,15 +106,24 @@ class LoginScreenViewController: UIViewController {
     }
     
     func setUpConstraint() {
-        NSLayoutConstraint(item: emailField, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: logo, attribute: .bottom, multiplier: 1, constant: 20).isActive = true
-        NSLayoutConstraint(item: passwordField, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: emailField, attribute: .bottom, multiplier: 1, constant: 10).isActive = true
+        NSLayoutConstraint(item: emailField, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: logo, attribute: .bottom, multiplier: 1, constant: 50).isActive = true
+        NSLayoutConstraint(item: passwordField, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: emailField, attribute: .bottom, multiplier: 1, constant: 20).isActive = true
     }
     
     @objc func loginBtnWasTapped() {
-        let inputEmail = emailField.text
-        let inputPassword = passwordField.text
-        print(inputEmail)
-        print(inputPassword)
+        let inputEmail = emailField.text ?? ""
+        let inputPassword = passwordField.text ?? ""
+        
+        if inputEmail.isEmpty == false && inputPassword.isEmpty == false {
+            if inputEmail.isValidEmail() {
+                AuthenticationService.instance.login(email: inputEmail, password: inputPassword) {
+                    
+                }
+                
+                let homeViewController = HomeViewController()
+                self.navigationController?.pushViewController(homeViewController, animated: true)
+            }
+        }
     }
 
 }
