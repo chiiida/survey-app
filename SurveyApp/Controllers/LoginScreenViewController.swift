@@ -13,6 +13,7 @@ class LoginScreenViewController: UIViewController {
     private let emailField = UITextField()
     private let passwordField = UITextField()
     private let loginBtn = UIButton(type: .system)
+    private let forgotBtn = UIButton(type: .system)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,7 @@ class LoginScreenViewController: UIViewController {
         passwordField.placeholder = "Password"
         loginBtn.setTitle("Log in", for: .normal)
         loginBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        forgotBtn.setTitle("Forgot?", for: .normal)
     }
     
     func setUpColor() {
@@ -46,6 +48,9 @@ class LoginScreenViewController: UIViewController {
         
         loginBtn.setTitleColor(.black, for: .normal)
         loginBtn.backgroundColor = .white
+        
+        forgotBtn.setTitleColor(LIGHT_GRAY, for: .normal)
+        forgotBtn.backgroundColor = DARK_GRAY
     }
     
     func setUpLayout() {
@@ -68,7 +73,7 @@ class LoginScreenViewController: UIViewController {
         logo.font = UIFont.systemFont(ofSize: 30)
         logo.center.x = view.center.x
     
-        emailField.frame = CGRect(x: 50, y: 250, width: UIScreen.main.bounds.width - 50 , height: 50.0)
+        emailField.frame = CGRect(x: 50, y: 250, width: UIScreen.main.bounds.width - 50, height: 50.0)
         emailField.center.x = view.center.x
         emailField.layer.cornerRadius = 10.0
         emailField.font = UIFont.systemFont(ofSize: 15)
@@ -80,7 +85,7 @@ class LoginScreenViewController: UIViewController {
         emailField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         emailField.delegate = self
         
-        passwordField.frame = CGRect(x: 50, y: 320, width: UIScreen.main.bounds.width - 50 , height: 50.0)
+        passwordField.frame = CGRect(x: 50, y: 320, width: UIScreen.main.bounds.width - 50, height: 50.0)
         passwordField.layer.cornerRadius = 10.0
         passwordField.center.x = view.center.x
         passwordField.font = UIFont.systemFont(ofSize: 15)
@@ -93,6 +98,9 @@ class LoginScreenViewController: UIViewController {
         passwordField.delegate = self
         passwordField.isSecureTextEntry = true
         
+        forgotBtn.frame = CGRect(x: UIScreen.main.bounds.width - 95, y: 320, width: 70, height: 50.0)
+        forgotBtn.addCorners(radius: 10.0)
+        
         loginBtn.frame = CGRect(x: 50, y: 390, width: UIScreen.main.bounds.width - 50 , height: 50.0)
         loginBtn.center.x = view.center.x
         loginBtn.addCorners(radius: 10.0)
@@ -102,6 +110,7 @@ class LoginScreenViewController: UIViewController {
         view.addSubview(logo)
         view.addSubview(emailField)
         view.addSubview(passwordField)
+        view.addSubview(forgotBtn)
         view.addSubview(loginBtn)
     }
     

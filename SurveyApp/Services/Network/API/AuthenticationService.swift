@@ -18,7 +18,13 @@ class AuthenticationService {
 //      ]
     
     func login(email: String, password: String, completion: @escaping () -> Void) {
-        let loginRequest =  LoginRequest(grant_type: "password", email: email, password: password, client_id: "ofzl-2h5ympKa0WqqTzqlVJUiRsxmXQmt5tkgrlWnOE", client_secret: "lMQb900L-mTeU-FVTCwyhjsfBwRCxwwbCitPob96cuU")
+        let client_id = ProcessInfo.processInfo.environment["client_id"]!
+        let client_secret = ProcessInfo.processInfo.environment["client_secret"]!
+        
+        print(client_id)
+        
+        let loginRequest =  LoginRequest(grant_type: "password", email: email, password: password, client_id: client_id, client_secret: client_secret)
+        
         AF.request(URL_LOGIN, method: .post, parameters: loginRequest.toDictonary(), encoding: JSONEncoding.default).responseJSON { (response) in
             print(response)
         }
