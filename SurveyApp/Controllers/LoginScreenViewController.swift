@@ -9,7 +9,7 @@ import UIKit
 
 class LoginScreenViewController: UIViewController {
     
-    private let logo = UILabel()
+    private let logoImageView = UIImageView()
     private let emailField = UITextField()
     private let passwordField = UITextField()
     private let loginBtn = UIButton(type: .system)
@@ -31,7 +31,6 @@ class LoginScreenViewController: UIViewController {
     }
     
     func setUpText() {
-        logo.text = "nimble"
         emailField.placeholder = "Email"
         passwordField.placeholder = "Password"
         loginBtn.setTitle("Log in", for: .normal)
@@ -68,12 +67,13 @@ class LoginScreenViewController: UIViewController {
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.frame
         
-        logo.frame = CGRect(x: 50, y: 150, width: 100, height: 30)
-        logo.textColor = .white
-        logo.font = UIFont.systemFont(ofSize: 30)
-        logo.center.x = view.center.x
+        let logoImage = UIImage(named: "logo")
+        logoImageView.frame = CGRect(x: 50, y: 110, width: 180, height: 180)
+        logoImageView.image = logoImage
+        logoImageView.contentMode = UIView.ContentMode.scaleAspectFit
+        logoImageView.center.x = view.center.x
     
-        emailField.frame = CGRect(x: 50, y: 250, width: UIScreen.main.bounds.width - 50, height: 50.0)
+        emailField.frame = CGRect(x: 50, y: 350, width: UIScreen.main.bounds.width - 50, height: 50.0)
         emailField.center.x = view.center.x
         emailField.layer.cornerRadius = 10.0
         emailField.font = UIFont.systemFont(ofSize: 15)
@@ -85,7 +85,7 @@ class LoginScreenViewController: UIViewController {
         emailField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         emailField.delegate = self
         
-        passwordField.frame = CGRect(x: 50, y: 320, width: UIScreen.main.bounds.width - 50, height: 50.0)
+        passwordField.frame = CGRect(x: 50, y: 420, width: UIScreen.main.bounds.width - 50, height: 50.0)
         passwordField.layer.cornerRadius = 10.0
         passwordField.center.x = view.center.x
         passwordField.font = UIFont.systemFont(ofSize: 15)
@@ -98,16 +98,16 @@ class LoginScreenViewController: UIViewController {
         passwordField.delegate = self
         passwordField.isSecureTextEntry = true
         
-        forgotBtn.frame = CGRect(x: UIScreen.main.bounds.width - 95, y: 320, width: 70, height: 50.0)
+        forgotBtn.frame = CGRect(x: UIScreen.main.bounds.width - 95, y: 420, width: 70, height: 50.0)
         forgotBtn.addCorners(radius: 10.0)
         
-        loginBtn.frame = CGRect(x: 50, y: 390, width: UIScreen.main.bounds.width - 50 , height: 50.0)
+        loginBtn.frame = CGRect(x: 50, y: 490, width: UIScreen.main.bounds.width - 50 , height: 50.0)
         loginBtn.center.x = view.center.x
         loginBtn.addCorners(radius: 10.0)
         loginBtn.addTarget(self, action: #selector(loginBtnWasTapped), for: .touchUpInside)
         
         view.addSubview(blurEffectView)
-        view.addSubview(logo)
+        view.addSubview(logoImageView)
         view.addSubview(emailField)
         view.addSubview(passwordField)
         view.addSubview(forgotBtn)
@@ -115,7 +115,7 @@ class LoginScreenViewController: UIViewController {
     }
     
     func setUpConstraint() {
-        NSLayoutConstraint(item: emailField, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: logo, attribute: .bottom, multiplier: 1, constant: 50).isActive = true
+        NSLayoutConstraint(item: emailField, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: logoImageView, attribute: .bottom, multiplier: 1, constant: 50).isActive = true
         NSLayoutConstraint(item: passwordField, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: emailField, attribute: .bottom, multiplier: 1, constant: 20).isActive = true
     }
     
