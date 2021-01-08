@@ -7,4 +7,5 @@ target 'SurveyApp' do
 
   # Pods for SurveyApp
   pod 'Alamofire', '~> 5.2'
+  pod 'SideMenu'
 end
