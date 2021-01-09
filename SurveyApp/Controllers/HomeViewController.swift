@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import SkeletonView
 
 class HomeViewController: UIViewController, UIScrollViewDelegate {
     
-    private let scrollView = UIScrollView()
     private var surveys = [Survey]()
+    private let scrollView = UIScrollView()
     private let pageControl = UIPageControl()
     private let userProfileBtn = UIButton()
     private let dateLabel = UILabel()
@@ -22,6 +23,13 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         loadSurveys()
         setUpView()
         setUpSurveyCardView()
+        
+        view.showAnimatedGradientSkeleton()
+        loadData { success in
+            if success {
+                self.view.hideSkeleton()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,17 +37,31 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
+    override func viewDidLayoutSubviews() {
+        view.layoutSkeletonIfNeeded()
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
        return .lightContent
     }
     
+    func loadData(completion: @escaping (_ Success: Bool) -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            completion(true)
+        }
+    }
+    
     func loadSurveys() {
-        surveys = [
-            Survey(id: "1", title: "Working from home Check-in", description: "We would like to know how you feel about our work from home We would like to know how you feel about working from home", cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_l"),
-            Survey(id: "1", title: "Careers bah bah bah For Bah Bah", description: "We would like to know how you feel about working from home We would like to know how you feel about working from home", cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/287db81c5e4242412cc0_l"),
-            Survey(id: "1", title: "Working from home Check-in", description: "We would like to know how you feel about working from home We would like to know how you feel about working from home", cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_l"),
-            Survey(id: "1", title: "Careers bah bah bah For Bah Bah", description: "We would like to know how you feel about working from home We would like to know how you feel about working from home", cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/287db81c5e4242412cc0_l")
-        ]
+        SurveyService.instance.getAllSurveys() { [weak self] surveys in
+            self?.surveys = surveys
+        }
+//        print(self.surveys)
+//        surveys = [
+//            Survey(id: "1", title: "Working from home Check-in", description: "We would like to know how you feel about our work from home We would like to know how you feel about working from home", cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_l"),
+//            Survey(id: "1", title: "Careers bah bah bah For Bah Bah", description: "We would like to know how you feel about working from home We would like to know how you feel about working from home", cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/287db81c5e4242412cc0_l"),
+//            Survey(id: "1", title: "Working from home Check-in", description: "We would like to know how you feel about working from home We would like to know how you feel about working from home", cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_l"),
+//            Survey(id: "1", title: "Careers bah bah bah For Bah Bah", description: "We would like to know how you feel about working from home We would like to know how you feel about working from home", cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/287db81c5e4242412cc0_l")
+//        ]
     }
     
     func setUpView() {
@@ -78,6 +100,17 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         view.addSubview(dayLabel)
         
         setUpLayout()
+        setUpSkeleton()
+    }
+    
+    func setUpSkeleton() {
+        userProfileBtn.isSkeletonable = true
+        
+        dateLabel.isSkeletonable = true
+        dateLabel.linesCornerRadius = 10
+        
+        dayLabel.isSkeletonable = true
+        dayLabel.linesCornerRadius = 10
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -89,6 +122,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         for i in 0..<surveys.count {
             let positionX = UIScreen.main.bounds.width * CGFloat(i)
             let surveyCardView = SurveyCardView(survey: surveys[i], positionX: positionX)
+            surveyCardView.isSkeletonable = true
 
             scrollView.contentSize.width = scrollView.frame.width * CGFloat(i + 1)
             scrollView.addSubview(surveyCardView)

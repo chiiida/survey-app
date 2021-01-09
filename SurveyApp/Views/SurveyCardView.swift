@@ -5,8 +5,8 @@
 //  Created by Chananchida Fuachai on 7/1/2564 BE.
 //
 
-import Foundation
 import UIKit
+import SkeletonView
 
 class SurveyCardView: UIView {
     var survey: Survey!
@@ -86,10 +86,12 @@ class SurveyCardView: UIView {
         titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
         titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -170).isActive = true
         titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -50).isActive = true
+        titleLabel.isSkeletonable = true
         
         descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15).isActive = true
         descriptionLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
         descriptionLabel.rightAnchor.constraint(equalTo: takeSurveyBtn.leftAnchor, constant: -50).isActive = true
+        descriptionLabel.isSkeletonable = true
 
         takeSurveyBtn.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
         takeSurveyBtn.leftAnchor.constraint(equalTo: descriptionLabel.rightAnchor, constant: 50).isActive = true
