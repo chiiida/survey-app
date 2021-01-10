@@ -10,7 +10,8 @@ import SkeletonView
 
 class HomeViewController: UIViewController, UIScrollViewDelegate {
     
-    private var surveys = [Survey]()
+    var surveys = [Survey]()
+    
     private let scrollView = UIScrollView()
     private let pageControl = UIPageControl()
     private let userProfileBtn = UIButton()
@@ -22,7 +23,6 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         
         loadSurveys()
         setUpView()
-        setUpSurveyCardView()
         
         view.showAnimatedGradientSkeleton()
         loadData { success in
@@ -52,16 +52,10 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func loadSurveys() {
-        SurveyService.instance.getAllSurveys() { [weak self] surveys in
-            self?.surveys = surveys
+        SurveyService.instance.fetchSurveys { [weak self] surveys in
+            self?.setUpSurveyCardView(surveys: surveys)
+            self?.pageControl.numberOfPages = surveys.count;
         }
-//        print(self.surveys)
-//        surveys = [
-//            Survey(id: "1", title: "Working from home Check-in", description: "We would like to know how you feel about our work from home We would like to know how you feel about working from home", cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_l"),
-//            Survey(id: "1", title: "Careers bah bah bah For Bah Bah", description: "We would like to know how you feel about working from home We would like to know how you feel about working from home", cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/287db81c5e4242412cc0_l"),
-//            Survey(id: "1", title: "Working from home Check-in", description: "We would like to know how you feel about working from home We would like to know how you feel about working from home", cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_l"),
-//            Survey(id: "1", title: "Careers bah bah bah For Bah Bah", description: "We would like to know how you feel about working from home We would like to know how you feel about working from home", cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/287db81c5e4242412cc0_l")
-//        ]
     }
     
     func setUpView() {
@@ -74,7 +68,6 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         
         pageControl.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 240, width: UIScreen.main.bounds.width, height: 50);
         pageControl.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
-        pageControl.numberOfPages = surveys.count;
         
         userProfileBtn.frame = CGRect(x: UIScreen.main.bounds.width - 55, y: 80, width: 35, height: 35);
         let imageUrlString = "https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png"
@@ -118,7 +111,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         pageControl.currentPage = Int(pageNumber)
     }
     
-    func setUpSurveyCardView() {
+    func setUpSurveyCardView(surveys: [Survey]) {
         for i in 0..<surveys.count {
             let positionX = UIScreen.main.bounds.width * CGFloat(i)
             let surveyCardView = SurveyCardView(survey: surveys[i], positionX: positionX)
@@ -133,18 +126,18 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         pageControl.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -190).isActive = true
         
-//        if #available(iOS 11.0, *) {
-//            dateLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-//        } else {
-//            dateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-//        }
-//        dateLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-//        dateLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -50).isActive = true
-//        dateLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 32).isActive = true
-//        dateLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -32).isActive = true
-//
-//        dayLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
-//        dayLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5).isActive = true
+        if #available(iOS 11.0, *) {
+            dateLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
+        } else {
+            dateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        }
+        dateLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        dateLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -50).isActive = true
+        dateLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 32).isActive = true
+        dateLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -32).isActive = true
+
+        dayLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
+        dayLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5).isActive = true
     }
 
 }

@@ -15,9 +15,9 @@ class SurveyService {
     
     var surveys = [Survey]()
     
-    func getAllSurveys(completion: @escaping ([Survey]) -> Void) {
+    func fetchSurveys(completion: @escaping ([Survey]) -> Void) {
         
-        AF.request("http://127.0.0.1:5000/api/temp/surveys", method: .get, parameters: nil,
+        AF.request(URL_SURVEY_LIST, method: .get, parameters: nil,
                    encoding: JSONEncoding.default).responseJSON { (response) in
                     switch response.result {
                     case .success(let value):
@@ -33,10 +33,10 @@ class SurveyService {
                             let survey = Survey(id: id, title: title, description: desctiption, cover_image_url: url)
                             self.surveys.append(survey)
                         }
-                        completion(self.surveys)
                     case .failure(let error):
                         debugPrint(error)
                     }
+                    completion(self.surveys)
         }
     }
     
