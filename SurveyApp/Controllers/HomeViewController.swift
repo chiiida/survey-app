@@ -21,10 +21,10 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        loadSurveys()
+        
         setUpView()
         
+        showLoadingAnimation()
         loadData { success in
             if success {
                 self.updateView()
@@ -36,7 +36,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        showLoadingAnimation()
+        loadSurveys()
     }
     
     override func viewDidLayoutSubviews() {
@@ -48,7 +48,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func loadData(completion: @escaping (_ Success: Bool) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
             let imageUrlString = "https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png"
             let imageUrl = URL(string: imageUrlString)!
             self.userProfileView.loadUrl(url: imageUrl)
@@ -67,11 +67,12 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
             DispatchQueue.main.async {
                 self?.surveys = surveys
             }
+            
+            self?.scrollView.subviews.forEach({ $0.removeFromSuperview() })
 
             self?.setUpSurveyCardView(surveys: surveys)
             self?.pageControl.numberOfPages = surveys.count;
         }
-        print(self.surveys)
     }
     
     func setUpView() {
@@ -152,9 +153,9 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
             surveyCardView.isSkeletonable = true
             let gradient = SkeletonGradient(baseColor: UIColor.midnightBlue)
             surveyCardView.showAnimatedGradientSkeleton(usingGradient: gradient)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                surveyCardView.hideSkeleton()
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
                 surveyCardView.updateLayout()
+                surveyCardView.hideSkeleton()
             }
 
             scrollView.contentSize.width = scrollView.frame.width * CGFloat(i + 1)

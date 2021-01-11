@@ -13,10 +13,8 @@ class SurveyService {
     
     static let instance = SurveyService()
     
-    var surveys = [Survey]()
-    
     func fetchSurveys(completion: @escaping ([Survey]) -> Void) {
-        
+        var surveys = [Survey]()
         AF.request("http://127.0.0.1:5000/api/temp/surveys", method: .get, parameters: nil,
                    encoding: JSONEncoding.default).responseJSON { (response) in
                     switch response.result {
@@ -31,12 +29,12 @@ class SurveyService {
                             let url = "\(attributes["cover_image_url"].stringValue)l"
 
                             let survey = Survey(id: id, title: title, description: desctiption, cover_image_url: url)
-                            self.surveys.append(survey)
+                            surveys.append(survey)
                         }
                     case .failure(let error):
                         debugPrint(error)
                     }
-                    completion(self.surveys)
+                    completion(surveys)
         }
     }
     

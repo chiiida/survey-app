@@ -11,7 +11,7 @@ import SkeletonView
 class SurveyCardView: UIView {
     var survey: Survey!
     
-    lazy var splashView: UIView = {
+    lazy var maskingView: UIView = {
         let splashView = UIView()
         splashView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         return splashView
@@ -19,6 +19,8 @@ class SurveyCardView: UIView {
     
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        let url = URL(string: survey.cover_image_url)!
+        bgImageView.loadUrl(url: url)
         return bgImageView
     }()
     
@@ -42,7 +44,7 @@ class SurveyCardView: UIView {
         return descriptionLabel
     }()
     
-    lazy var takeSurveyBtn: UIButton = {
+    lazy var surveyDetailBtn: UIButton = {
         let takeSurveyBtn = UIButton()
         takeSurveyBtn.setImage(UIImage(named: "arrow"), for: .normal)
         takeSurveyBtn.imageView?.contentMode = .scaleAspectFit
@@ -67,10 +69,10 @@ class SurveyCardView: UIView {
     
     func setUpViews() {
         addSubview(bgImageView)
-        addSubview(splashView)
+        addSubview(maskingView)
         addSubview(titleLabel)
         addSubview(descriptionLabel)
-        addSubview(takeSurveyBtn)
+        addSubview(surveyDetailBtn)
         
         setUpLayout()
         setUpSkeleton()
@@ -88,21 +90,18 @@ class SurveyCardView: UIView {
     }
     
     func updateLayout() {
-        let url = URL(string: survey.cover_image_url)!
-        bgImageView.loadUrl(url: url)
-        
-        splashView.backgroundColor = DARK_GRAY.withAlphaComponent(0.4)
+        maskingView.backgroundColor = DARK_GRAY.withAlphaComponent(0.4)
         
         titleLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
         titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -50).isActive = true
         
-        descriptionLabel.rightAnchor.constraint(equalTo: takeSurveyBtn.rightAnchor, constant: -50).isActive = true
+        descriptionLabel.rightAnchor.constraint(equalTo: surveyDetailBtn.rightAnchor, constant: -50).isActive = true
         
-        takeSurveyBtn.frame = CGRect(x: UIScreen.main.bounds.width - 75, y: UIScreen.main.bounds.height - 165, width: 55, height: 55)
-        takeSurveyBtn.circle()
-        takeSurveyBtn.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
-        takeSurveyBtn.leftAnchor.constraint(equalTo: descriptionLabel.rightAnchor, constant: 50).isActive = true
-        takeSurveyBtn.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
+        surveyDetailBtn.frame = CGRect(x: UIScreen.main.bounds.width - 75, y: UIScreen.main.bounds.height - 165, width: 55, height: 55)
+        surveyDetailBtn.circle()
+        surveyDetailBtn.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
+        surveyDetailBtn.leftAnchor.constraint(equalTo: descriptionLabel.rightAnchor, constant: 50).isActive = true
+        surveyDetailBtn.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
     }
     
     func setUpSkeleton() {
@@ -115,11 +114,16 @@ class SurveyCardView: UIView {
     }
     
     func setUpActions() {
-        takeSurveyBtn.addTarget(self, action: #selector(takeSurveyBtnWasTapped), for: .touchUpInside)
+        surveyDetailBtn.addTarget(self, action: #selector(takeSurveyBtnWasTapped), for: .touchUpInside)
     }
     
     @objc private func takeSurveyBtnWasTapped() {
-        print(survey.id)
+        let surveyDetailVC = SurveyDetailViewController()
+        surveyDetailVC.survey = self.survey
+        surveyDetailVC.bgImageView = self.bgImageView
+        surveyDetailVC.maskingView = self.maskingView
+        surveyDetailVC.delegate = (self.parentViewController as! HomeViewController)
+        self.parentViewController?.navigationController?.pushViewController(surveyDetailVC, animated: true)
     }
     
 }
