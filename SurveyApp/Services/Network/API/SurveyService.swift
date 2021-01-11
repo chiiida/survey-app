@@ -17,7 +17,7 @@ class SurveyService {
     
     func fetchSurveys(completion: @escaping ([Survey]) -> Void) {
         
-        AF.request(URL_SURVEY_LIST, method: .get, parameters: nil,
+        AF.request("http://127.0.0.1:5000/api/temp/surveys", method: .get, parameters: nil,
                    encoding: JSONEncoding.default).responseJSON { (response) in
                     switch response.result {
                     case .success(let value):

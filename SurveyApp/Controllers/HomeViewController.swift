@@ -14,20 +14,21 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     
     private let scrollView = UIScrollView()
     private let pageControl = UIPageControl()
-    private let userProfileBtn = UIButton()
+    private let userProfileView = UIImageView()
     private let dateLabel = UILabel()
     private let dayLabel = UILabel()
+    private let containerView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         loadSurveys()
         setUpView()
         
-        view.showAnimatedGradientSkeleton()
         loadData { success in
             if success {
-                self.view.hideSkeleton()
+                self.updateView()
+                self.hideLoadingAnimation()
             }
         }
     }
@@ -35,6 +36,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        showLoadingAnimation()
     }
     
     override func viewDidLayoutSubviews() {
@@ -46,16 +48,30 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func loadData(completion: @escaping (_ Success: Bool) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            let imageUrlString = "https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png"
+            let imageUrl = URL(string: imageUrlString)!
+            self.userProfileView.loadUrl(url: imageUrl)
+            
+//            if self.userProfileView.image != nil {
+//                completion(true)
+//            } else {
+//                completion(false)
+//            }
             completion(true)
         }
     }
     
     func loadSurveys() {
         SurveyService.instance.fetchSurveys { [weak self] surveys in
+            DispatchQueue.main.async {
+                self?.surveys = surveys
+            }
+
             self?.setUpSurveyCardView(surveys: surveys)
             self?.pageControl.numberOfPages = surveys.count;
         }
+        print(self.surveys)
     }
     
     func setUpView() {
@@ -66,16 +82,27 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         scrollView.bounds = UIScreen.main.bounds
         scrollView.delegate = self
         
-        pageControl.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 240, width: UIScreen.main.bounds.width, height: 50);
+        pageControl.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 240, width: UIScreen.main.bounds.width, height: 50)
         pageControl.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
         
-        userProfileBtn.frame = CGRect(x: UIScreen.main.bounds.width - 55, y: 80, width: 35, height: 35);
-        let imageUrlString = "https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png"
-        let imageUrl = URL(string: imageUrlString)!
-        let image = try? UIImage(withContentsOfUrl: imageUrl)
-        userProfileBtn.setImage(image, for: .normal)
-        userProfileBtn.imageView?.layer.cornerRadius = userProfileBtn.bounds.height / 2.0
+        userProfileView.frame = CGRect(x: UIScreen.main.bounds.width - 55, y: 80, width: 35, height: 35)
+        userProfileView.circle()
         
+        dateLabel.frame = CGRect(x: 20, y: 60, width: 130, height: 5)
+        
+        dayLabel.frame = CGRect(x: 20, y: 90, width: 110, height: 5)
+        
+        view.addSubview(scrollView)
+        view.addSubview(pageControl)
+        view.addSubview(userProfileView)
+        view.addSubview(dateLabel)
+        view.addSubview(dayLabel)
+        
+//        setUpLayout()
+        setUpSkeleton()
+    }
+    
+    func updateView() {
         dateLabel.frame = CGRect(x: 20, y: 60, width: 200, height: 15)
         dateLabel.text = "MONDAY, JUNE 15"
         dateLabel.font = UIFont.boldSystemFont(ofSize: 13.0)
@@ -85,25 +112,32 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         dayLabel.text = "Today"
         dayLabel.font = UIFont.boldSystemFont(ofSize: 35.0)
         dayLabel.textColor = .white
-        
-        view.addSubview(scrollView)
-        view.addSubview(pageControl)
-        view.addSubview(userProfileBtn)
-        view.addSubview(dateLabel)
-        view.addSubview(dayLabel)
-        
-        setUpLayout()
-        setUpSkeleton()
     }
     
     func setUpSkeleton() {
-        userProfileBtn.isSkeletonable = true
+        SkeletonAppearance.default.multilineSpacing = 8
+            
+        userProfileView.isSkeletonable = true
         
         dateLabel.isSkeletonable = true
         dateLabel.linesCornerRadius = 10
         
         dayLabel.isSkeletonable = true
         dayLabel.linesCornerRadius = 10
+    }
+    
+    func showLoadingAnimation() {
+        let gradient = SkeletonGradient(baseColor: UIColor.midnightBlue)
+        
+        dateLabel.showAnimatedGradientSkeleton(usingGradient: gradient)
+        dayLabel.showAnimatedGradientSkeleton(usingGradient: gradient)
+        userProfileView.showAnimatedGradientSkeleton(usingGradient: gradient)
+    }
+    
+    func hideLoadingAnimation() {
+        dateLabel.hideSkeleton()
+        dayLabel.hideSkeleton()
+        userProfileView.hideSkeleton()
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -116,6 +150,12 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
             let positionX = UIScreen.main.bounds.width * CGFloat(i)
             let surveyCardView = SurveyCardView(survey: surveys[i], positionX: positionX)
             surveyCardView.isSkeletonable = true
+            let gradient = SkeletonGradient(baseColor: UIColor.midnightBlue)
+            surveyCardView.showAnimatedGradientSkeleton(usingGradient: gradient)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                surveyCardView.hideSkeleton()
+                surveyCardView.updateLayout()
+            }
 
             scrollView.contentSize.width = scrollView.frame.width * CGFloat(i + 1)
             scrollView.addSubview(surveyCardView)

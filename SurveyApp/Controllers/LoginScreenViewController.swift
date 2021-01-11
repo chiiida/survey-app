@@ -139,15 +139,15 @@ class LoginScreenViewController: UIViewController {
 
 extension LoginScreenViewController: UITextFieldDelegate {
     
-    func textFieldDidBeginEditing(textField: UITextField!) {    //delegate method
+    func textFieldDidBeginEditing(_ textField: UITextField) {    //delegate method
 
     }
 
-    func textFieldShouldEndEditing(textField: UITextField!) -> Bool {  //delegate method
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {  //delegate method
         return false
     }
 
-    func textFieldShouldReturn(textField: UITextField!) -> Bool {   //delegate method
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
       textField.resignFirstResponder()
 
         return true

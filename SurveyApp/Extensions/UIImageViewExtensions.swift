@@ -7,6 +7,8 @@
 
 import UIKit
 
+let imageCache = NSCache<NSString, AnyObject>()
+
 extension UIImageView {
     func loadUrl(url: URL) {
         DispatchQueue.global().async { [weak self] in
@@ -18,5 +20,10 @@ extension UIImageView {
                 }
             }
         }
+    }
+    
+    func circle() {
+        layer.cornerRadius = self.frame.size.height/2
+        self.clipsToBounds = true
     }
 }
