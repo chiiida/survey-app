@@ -49,7 +49,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func loadData(completion: @escaping (_ Success: Bool) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let imageUrlString = "https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png"
             let imageUrl = URL(string: imageUrlString)!
             self.userProfileView.loadUrl(url: imageUrl)
@@ -157,7 +157,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
             surveyCardView.isSkeletonable = true
             let gradient = SkeletonGradient(baseColor: UIColor.midnightBlue)
             surveyCardView.showAnimatedGradientSkeleton(usingGradient: gradient)
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 surveyCardView.updateLayout()
                 surveyCardView.hideSkeleton()
             }
