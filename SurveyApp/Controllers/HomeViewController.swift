@@ -98,9 +98,12 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         view.addSubview(userProfileView)
         view.addSubview(dateLabel)
         view.addSubview(dayLabel)
-        
-//        setUpLayout()
+
         setUpSkeleton()
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(userProfileTapped(tapGestureRecognizer:)))
+        userProfileView.isUserInteractionEnabled = true
+        userProfileView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     func updateView() {
@@ -163,22 +166,13 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    func setUpLayout() {
-        pageControl.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -190).isActive = true
-        
-        if #available(iOS 11.0, *) {
-            dateLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-        } else {
-            dateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+    @objc func userProfileTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        AuthenticationService.instance.logOut { success in
+            if success {
+                let loginVC = LoginScreenViewController()
+                self.navigationController?.pushViewController(loginVC, animated: true)
+            }
         }
-        dateLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        dateLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -50).isActive = true
-        dateLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 32).isActive = true
-        dateLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -32).isActive = true
-
-        dayLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
-        dayLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5).isActive = true
     }
 
 }

@@ -10,6 +10,8 @@
 		43436A1025AA55C4008A047D /* SurveyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43436A0F25AA55C4008A047D /* SurveyService.swift */; };
 		434482C625AC3BE7004D660E /* SurveyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434482C525AC3BE7004D660E /* SurveyDetailViewController.swift */; };
 		434482D025AC422D004D660E /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434482CF25AC422D004D660E /* UIViewExtensions.swift */; };
+		434482DE25AE03F9004D660E /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434482DD25AE03F9004D660E /* BaseService.swift */; };
+		434482E225AE041E004D660E /* AlamofireRequestModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434482E125AE041E004D660E /* AlamofireRequestModal.swift */; };
 		4347C93925A5E1BA004F6E68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347C93825A5E1BA004F6E68 /* Constants.swift */; };
 		4347C94025A5ECF8004F6E68 /* UITextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347C93F25A5ECF8004F6E68 /* UITextFieldExtensions.swift */; };
 		4347C94425A5F10E004F6E68 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347C94325A5F10E004F6E68 /* UIButtonExtensions.swift */; };
@@ -47,6 +49,8 @@
 		43436A0F25AA55C4008A047D /* SurveyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyService.swift; sourceTree = "<group>"; };
 		434482C525AC3BE7004D660E /* SurveyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyDetailViewController.swift; sourceTree = "<group>"; };
 		434482CF25AC422D004D660E /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		434482DD25AE03F9004D660E /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
+		434482E125AE041E004D660E /* AlamofireRequestModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireRequestModal.swift; sourceTree = "<group>"; };
 		4347C93825A5E1BA004F6E68 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4347C93F25A5ECF8004F6E68 /* UITextFieldExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtensions.swift; sourceTree = "<group>"; };
 		4347C94325A5F10E004F6E68 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
@@ -162,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				4347C94B25A5FE33004F6E68 /* LoginRequest.swift */,
+				434482E125AE041E004D660E /* AlamofireRequestModal.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 			children = (
 				4347C94F25A5FE8D004F6E68 /* AuthenticationService.swift */,
 				43436A0F25AA55C4008A047D /* SurveyService.swift */,
+				434482DD25AE03F9004D660E /* BaseService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -399,8 +405,10 @@
 				4347C94425A5F10E004F6E68 /* UIButtonExtensions.swift in Sources */,
 				4360728925A592DE0043F672 /* SceneDelegate.swift in Sources */,
 				43DB9AD125A63EDF008707CF /* HomeViewController.swift in Sources */,
+				434482DE25AE03F9004D660E /* BaseService.swift in Sources */,
 				43DB9AD425A6417F008707CF /* StringExtensions.swift in Sources */,
 				4347C95325A60284004F6E68 /* User.swift in Sources */,
+				434482E225AE041E004D660E /* AlamofireRequestModal.swift in Sources */,
 				434482D025AC422D004D660E /* UIViewExtensions.swift in Sources */,
 				43E3D02F25A70B3500F7F9C9 /* Survey.swift in Sources */,
 				43E3D02925A7052700F7F9C9 /* SurveyCardView.swift in Sources */,
