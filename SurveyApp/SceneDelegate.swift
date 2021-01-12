@@ -20,7 +20,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windonScreen = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windonScreen
-        window?.rootViewController = UINavigationController(rootViewController: LoginScreenViewController())
+        
+        var vc: UIViewController
+        if (UserDefaults.standard.string(forKey: "access_token") != nil) {
+            vc = HomeViewController()
+        } else {
+            vc = LoginScreenViewController()
+        }
+        window?.rootViewController = UINavigationController(rootViewController: vc)
         window?.makeKeyAndVisible()
     }
 

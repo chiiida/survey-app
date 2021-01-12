@@ -9,6 +9,8 @@ import UIKit
 
 class LoginScreenViewController: UIViewController {
     
+    private let bgImageView = UIImageView()
+    private let overlayView = UIImageView()
     private let logoImageView = UIImageView()
     private let emailField = UITextField()
     private let passwordField = UITextField()
@@ -17,17 +19,28 @@ class LoginScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-        setUpLayout()
-        setUpText()
-        setUpColor()
-        setUpConstraint()
+        setUpView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    func setUpView() {
+        view.addSubview(bgImageView)
+        view.addSubview(overlayView)
+        view.addSubview(logoImageView)
+        view.addSubview(emailField)
+        view.addSubview(passwordField)
+        view.addSubview(forgotBtn)
+        view.addSubview(loginBtn)
+        
+        setUpLayout()
+        setUpText()
+        setUpColor()
+        setUpConstraint()
     }
     
     func setUpText() {
@@ -53,21 +66,13 @@ class LoginScreenViewController: UIViewController {
     }
     
     func setUpLayout() {
-        let colorTop =  UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0).cgColor
-        let colorBottom = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0).cgColor
-                    
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [colorTop, colorBottom]
-        gradientLayer.locations = [0.0, 0.5]
-        gradientLayer.frame = view.bounds
-                
-        view.layer.insertSublayer(gradientLayer, at:0)
+        bgImageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        bgImageView.image = UIImage(named: "Overlay-bg")
         
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.frame
+        overlayView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        overlayView.image = UIImage(named: "Overlay")
         
-        let logoImage = UIImage(named: "logo")
+        let logoImage = UIImage(named: "Logo White")
         logoImageView.frame = CGRect(x: 50, y: 110, width: 180, height: 180)
         logoImageView.image = logoImage
         logoImageView.contentMode = UIView.ContentMode.scaleAspectFit
@@ -83,6 +88,7 @@ class LoginScreenViewController: UIViewController {
         emailField.returnKeyType = UIReturnKeyType.done
         emailField.clearButtonMode = UITextField.ViewMode.whileEditing
         emailField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        emailField.tag = 1
         emailField.delegate = self
         
         passwordField.frame = CGRect(x: 50, y: 420, width: UIScreen.main.bounds.width - 50, height: 50.0)
@@ -96,6 +102,7 @@ class LoginScreenViewController: UIViewController {
         passwordField.clearButtonMode = UITextField.ViewMode.whileEditing
         passwordField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         passwordField.delegate = self
+        passwordField.tag = 2
         passwordField.isSecureTextEntry = true
         
         forgotBtn.frame = CGRect(x: UIScreen.main.bounds.width - 95, y: 420, width: 70, height: 50.0)
@@ -105,13 +112,6 @@ class LoginScreenViewController: UIViewController {
         loginBtn.center.x = view.center.x
         loginBtn.addCorners(radius: 10.0)
         loginBtn.addTarget(self, action: #selector(loginBtnWasTapped), for: .touchUpInside)
-        
-        view.addSubview(blurEffectView)
-        view.addSubview(logoImageView)
-        view.addSubview(emailField)
-        view.addSubview(passwordField)
-        view.addSubview(forgotBtn)
-        view.addSubview(loginBtn)
     }
     
     func setUpConstraint() {
@@ -125,12 +125,13 @@ class LoginScreenViewController: UIViewController {
         
         if inputEmail.isEmpty == false && inputPassword.isEmpty == false {
             if inputEmail.isValidEmail() {
-                AuthenticationService.instance.login(email: inputEmail, password: inputPassword) {
-                    
+                AuthenticationService.instance.login(email: inputEmail, password: inputPassword) { success in
+                    if success {
+                        let homeViewController = HomeViewController()
+                        self.navigationController?.pushViewController(homeViewController, animated: true)
+                    }
                 }
                 
-                let homeViewController = HomeViewController()
-                self.navigationController?.pushViewController(homeViewController, animated: true)
             }
         }
     }
@@ -138,19 +139,23 @@ class LoginScreenViewController: UIViewController {
 }
 
 extension LoginScreenViewController: UITextFieldDelegate {
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {    //delegate method
 
+    private func textFieldDidBeginEditing(textField: UITextField!) {    //delegate method
     }
 
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {  //delegate method
+    private func textFieldShouldEndEditing(textField: UITextField!) -> Bool {  //delegate method
         return false
     }
 
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
-      textField.resignFirstResponder()
+    private func textFieldShouldReturn(textField: UITextField!) -> Bool {   //delegate method
+        let nextTag = textField.tag + 1
+
+        if let nextResponder = textField.superview?.viewWithTag(nextTag) {
+            nextResponder.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
 
         return true
     }
 }
-

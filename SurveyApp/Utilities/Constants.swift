@@ -9,9 +9,11 @@ import Foundation
 import UIKit
 
 // URL Constants
-let BASE_URL = "https://nimble-survey-web-staging.herokuapp.com/"
+let BASE_URL = "https://survey-api.nimblehq.co/"
 let URL_LOGIN = "\(BASE_URL)api/v1/oauth/token"
-let URL_SURVEY_LIST = "\(BASE_URL)api/v1/surveys?page[number]=1&page[size]=2"
+let URL_LOGOUT = "\(BASE_URL)api/v1/oauth/revoke"
+let URL_SURVEY_LIST = "\(BASE_URL)api/v1/surveys?page[number]=1&page[size]=5"
+let URL_USER = "\(BASE_URL)api/v1/me"
 
 // Color code
 let DARK_GRAY = UIColor(red: 0.5882, green: 0.5686, blue: 0.5686, alpha: 1.0)

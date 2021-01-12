@@ -52,7 +52,8 @@ class SurveyDetailViewController: UIViewController {
         self.navigationController!.navigationBar.shadowImage = UIImage()
         self.navigationController!.navigationBar.isTranslucent = true
         
-        self.navigationController?.navigationBar.backItem?.title = ""
+        self.navigationController?.navigationBar.backItem?.title = nil
+        self.navigationController?.navigationBar.tintColor = .white
     }
     
     override func viewWillAppear(_ animated: Bool) {
