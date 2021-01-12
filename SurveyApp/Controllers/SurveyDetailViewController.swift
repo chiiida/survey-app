@@ -17,7 +17,6 @@ class SurveyDetailViewController: UIViewController {
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel(frame: CGRect(x: 20, y: 100, width: UIScreen.main.bounds.width - 20, height: 40))
         titleLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = survey.title
         titleLabel.textColor = .white
         titleLabel.lineBreakMode = .byWordWrapping
@@ -27,7 +26,6 @@ class SurveyDetailViewController: UIViewController {
 
     lazy var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel(frame: CGRect(x: 20, y: 140, width: UIScreen.main.bounds.width - 20, height: 50))
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.text = survey.description
         descriptionLabel.textColor = LIGHT_GRAY
         descriptionLabel.font = UIFont.systemFont(ofSize: 16.0)
