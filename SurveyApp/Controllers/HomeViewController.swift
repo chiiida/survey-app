@@ -37,6 +37,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         loadSurveys()
+        pageControl.currentPage = 0
     }
     
     override func viewDidLayoutSubviews() {
