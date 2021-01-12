@@ -11,4 +11,8 @@ extension UIButton {
     func addCorners(radius: CGFloat) {
         layer.cornerRadius = radius
     }
+    
+    func circle() {
+        layer.cornerRadius = self.frame.width / 2
+    }
 }
