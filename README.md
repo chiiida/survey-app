@@ -17,5 +17,4 @@ To run the test using Fastlane, run this command:
 $ fastlane ios allTests
 ```
 ## Author
----
 - Chananchida Fuachai
