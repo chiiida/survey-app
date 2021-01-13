@@ -41,29 +41,6 @@ class SurveyService: BaseService {
         }, failure: { error in
             debugPrint(error!)
         })
-        
-//        print("\(userTokenType ?? "") \(accessToken ?? "")")
-//        AF.request(URL_SURVEY_LIST, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
-//                    print(response)
-//                    switch response.result {
-//                    case .success(let value):
-//                        let json = JSON(value)
-//                        let data = json["data"].arrayValue
-//                        for item in data {
-//                            let id = item["id"].stringValue
-//                            let attributes = item["attributes"]
-//                            let title = attributes["title"].stringValue
-//                            let desctiption = attributes["description"].stringValue
-//                            let url = "\(attributes["cover_image_url"].stringValue)l"
-//
-//                            let survey = Survey(id: id, title: title, description: desctiption, cover_image_url: url)
-//                            surveys.append(survey)
-//                        }
-//                    case .failure(let error):
-//                        debugPrint(error)
-//                    }
-//                    completion(surveys)
-//        }
     }
     
 }
