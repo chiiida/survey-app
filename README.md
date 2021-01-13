@@ -1,7 +1,5 @@
 # Survey App
-
 ## Project setup
----
 ### Prerequisites
 - Xcode
 - CocoaPods
@@ -14,7 +12,6 @@ $ pod install
 ```
 
 ## Test
----
 To run the test using Fastlane, run this command:
 ```
 $ fastlane ios allTests
