@@ -9,13 +9,13 @@ import UIKit
 
 class LoginScreenViewController: UIViewController {
     
-    private let bgImageView = UIImageView()
-    private let overlayView = UIImageView()
-    private let logoImageView = UIImageView()
-    private let emailField = UITextField()
-    private let passwordField = UITextField()
-    private let loginBtn = UIButton(type: .system)
-    private let forgotBtn = UIButton(type: .system)
+    let bgImageView = UIImageView()
+    let overlayView = UIImageView()
+    let logoImageView = UIImageView()
+    let emailField = UITextField()
+    let passwordField = UITextField()
+    let loginBtn = UIButton(type: .system)
+    let forgotBtn = UIButton(type: .system)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +89,8 @@ class LoginScreenViewController: UIViewController {
         emailField.clearButtonMode = UITextField.ViewMode.whileEditing
         emailField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         emailField.tag = 1
+        emailField.textContentType = UITextContentType.emailAddress
+        emailField.keyboardType = UIKeyboardType.emailAddress
         emailField.delegate = self
         
         passwordField.frame = CGRect(x: 50, y: 420, width: UIScreen.main.bounds.width - 50, height: 50.0)

@@ -1,5 +1,5 @@
 //
-//  UIImageExtensions.swift
+//  UIImage+Extensions.swift
 //  SurveyApp
 //
 //  Created by Chananchida Fuachai on 9/1/2564 BE.

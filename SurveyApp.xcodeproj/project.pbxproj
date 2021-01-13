@@ -12,6 +12,8 @@
 		434482D025AC422D004D660E /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434482CF25AC422D004D660E /* UIViewExtensions.swift */; };
 		434482DE25AE03F9004D660E /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434482DD25AE03F9004D660E /* BaseService.swift */; };
 		434482E225AE041E004D660E /* AlamofireRequestModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434482E125AE041E004D660E /* AlamofireRequestModal.swift */; };
+		434482E625AEA6CA004D660E /* LoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434482E525AEA6CA004D660E /* LoginViewControllerTests.swift */; };
+		434482EC25AEACD9004D660E /* AuthenticationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434482EB25AEACD9004D660E /* AuthenticationServiceTests.swift */; };
 		4347C93925A5E1BA004F6E68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347C93825A5E1BA004F6E68 /* Constants.swift */; };
 		4347C94025A5ECF8004F6E68 /* UITextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347C93F25A5ECF8004F6E68 /* UITextFieldExtensions.swift */; };
 		4347C94425A5F10E004F6E68 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347C94325A5F10E004F6E68 /* UIButtonExtensions.swift */; };
@@ -26,7 +28,6 @@
 		43DB9AD125A63EDF008707CF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DB9AD025A63EDF008707CF /* HomeViewController.swift */; };
 		43DB9AD425A6417F008707CF /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DB9AD325A6417F008707CF /* StringExtensions.swift */; };
 		43DB9AD725A64411008707CF /* EncodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DB9AD625A64411008707CF /* EncodableExtensions.swift */; };
-		43E3D01C25A6F0A700F7F9C9 /* SurveyAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E3D01B25A6F0A700F7F9C9 /* SurveyAppTests.swift */; };
 		43E3D02925A7052700F7F9C9 /* SurveyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E3D02825A7052700F7F9C9 /* SurveyCardView.swift */; };
 		43E3D02F25A70B3500F7F9C9 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E3D02E25A70B3500F7F9C9 /* Survey.swift */; };
 		43E3D03325A70C5700F7F9C9 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E3D03225A70C5700F7F9C9 /* UIImageViewExtensions.swift */; };
@@ -51,6 +52,8 @@
 		434482CF25AC422D004D660E /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		434482DD25AE03F9004D660E /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		434482E125AE041E004D660E /* AlamofireRequestModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireRequestModal.swift; sourceTree = "<group>"; };
+		434482E525AEA6CA004D660E /* LoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTests.swift; sourceTree = "<group>"; };
+		434482EB25AEACD9004D660E /* AuthenticationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceTests.swift; sourceTree = "<group>"; };
 		4347C93825A5E1BA004F6E68 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4347C93F25A5ECF8004F6E68 /* UITextFieldExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtensions.swift; sourceTree = "<group>"; };
 		4347C94325A5F10E004F6E68 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
@@ -68,7 +71,6 @@
 		43DB9AD325A6417F008707CF /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		43DB9AD625A64411008707CF /* EncodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtensions.swift; sourceTree = "<group>"; };
 		43E3D01925A6F0A700F7F9C9 /* SurveyAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SurveyAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		43E3D01B25A6F0A700F7F9C9 /* SurveyAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyAppTests.swift; sourceTree = "<group>"; };
 		43E3D01D25A6F0A700F7F9C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43E3D02825A7052700F7F9C9 /* SurveyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyCardView.swift; sourceTree = "<group>"; };
 		43E3D02E25A70B3500F7F9C9 /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
@@ -223,8 +225,9 @@
 		43E3D01A25A6F0A700F7F9C9 /* SurveyAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				43E3D01B25A6F0A700F7F9C9 /* SurveyAppTests.swift */,
 				43E3D01D25A6F0A700F7F9C9 /* Info.plist */,
+				434482E525AEA6CA004D660E /* LoginViewControllerTests.swift */,
+				434482EB25AEACD9004D660E /* AuthenticationServiceTests.swift */,
 			);
 			path = SurveyAppTests;
 			sourceTree = "<group>";
@@ -425,7 +428,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43E3D01C25A6F0A700F7F9C9 /* SurveyAppTests.swift in Sources */,
+				434482EC25AEACD9004D660E /* AuthenticationServiceTests.swift in Sources */,
+				434482E625AEA6CA004D660E /* LoginViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
