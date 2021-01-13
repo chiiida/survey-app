@@ -1,5 +1,5 @@
 //
-//  UIViewExtensions.swift
+//  UIView+Extensions.swift
 //  SurveyApp
 //
 //  Created by Chananchida Fuachai on 11/1/2564 BE.

@@ -53,12 +53,6 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
             let imageUrlString = "https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png"
             let imageUrl = URL(string: imageUrlString)!
             self.userProfileView.loadUrl(url: imageUrl)
-            
-//            if self.userProfileView.image != nil {
-//                completion(true)
-//            } else {
-//                completion(false)
-//            }
             completion(true)
         }
     }

@@ -10,3 +10,11 @@ target 'SurveyApp' do
   pod 'SwiftyJSON'
   pod 'SkeletonView'
 end
+
+target 'SurveyAppTests' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for SurveyApp
+  pod 'Mocker'
+end
