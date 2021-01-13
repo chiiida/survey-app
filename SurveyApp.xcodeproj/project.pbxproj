@@ -33,8 +33,6 @@
 		43E977F625AED814009E13EA /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E977EF25AED814009E13EA /* UIImageView+Extensions.swift */; };
 		43E977F725AED814009E13EA /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E977F025AED814009E13EA /* UIView+Extensions.swift */; };
 		43E977FB25AED9A9009E13EA /* HomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E977FA25AED9A9009E13EA /* HomeViewControllerTests.swift */; };
-		43E9781725AF1BE4009E13EA /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E9781625AF1BE4009E13EA /* MockURLProtocol.swift */; };
-		43E9781D25AF1F1F009E13EA /* SessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E9781C25AF1F1F009E13EA /* SessionMock.swift */; };
 		E689F73075911CD38FEE1759 /* Pods_SurveyAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19E82D70B64CC763DEB78F93 /* Pods_SurveyAppTests.framework */; };
 		E97CDAC147AB13970F4B3E3E /* Pods_SurveyApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC3CD4C83C8055806491619 /* Pods_SurveyApp.framework */; };
 /* End PBXBuildFile section */
@@ -83,8 +81,6 @@
 		43E977EF25AED814009E13EA /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImageView+Extensions.swift"; path = "../../../../Downloads/UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		43E977F025AED814009E13EA /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Extensions.swift"; path = "../../../../Downloads/UIView+Extensions.swift"; sourceTree = "<group>"; };
 		43E977FA25AED9A9009E13EA /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
-		43E9781625AF1BE4009E13EA /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
-		43E9781C25AF1F1F009E13EA /* SessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionMock.swift; sourceTree = "<group>"; };
 		5DC3CD4C83C8055806491619 /* Pods_SurveyApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurveyApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C92B8FBC7A33C69F2289A3A /* Pods-SurveyApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurveyApp.debug.xcconfig"; path = "Target Support Files/Pods-SurveyApp/Pods-SurveyApp.debug.xcconfig"; sourceTree = "<group>"; };
 		8FFA5AD260BCB1444F86AB0B /* Pods-SurveyAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurveyAppTests.release.xcconfig"; path = "Target Support Files/Pods-SurveyAppTests/Pods-SurveyAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -228,7 +224,6 @@
 		43E3D01A25A6F0A700F7F9C9 /* SurveyAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				43E9781525AF1BCE009E13EA /* Mocks */,
 				43E3D01D25A6F0A700F7F9C9 /* Info.plist */,
 				434482E525AEA6CA004D660E /* LoginViewControllerTests.swift */,
 				434482EB25AEACD9004D660E /* AuthenticationServiceTests.swift */,
@@ -243,15 +238,6 @@
 				43E3D02825A7052700F7F9C9 /* SurveyCardView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		43E9781525AF1BCE009E13EA /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				43E9781625AF1BE4009E13EA /* MockURLProtocol.swift */,
-				43E9781C25AF1F1F009E13EA /* SessionMock.swift */,
-			);
-			path = Mocks;
 			sourceTree = "<group>";
 		};
 		88DB03C1E9268E043DFF369E /* Frameworks */ = {
@@ -487,10 +473,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				434482EC25AEACD9004D660E /* AuthenticationServiceTests.swift in Sources */,
-				43E9781D25AF1F1F009E13EA /* SessionMock.swift in Sources */,
 				43E977FB25AED9A9009E13EA /* HomeViewControllerTests.swift in Sources */,
 				434482E625AEA6CA004D660E /* LoginViewControllerTests.swift in Sources */,
-				43E9781725AF1BE4009E13EA /* MockURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

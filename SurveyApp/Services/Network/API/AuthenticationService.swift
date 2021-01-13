@@ -15,16 +15,11 @@ class AuthenticationService: BaseService {
     let client_id = ProcessInfo.processInfo.environment["client_id"]!
     let client_secret = ProcessInfo.processInfo.environment["client_secret"]!
     
-    private let manager: Session
-    init(manager: Session = Session.default) {
-        self.manager = manager
-    }
-    
     func login(email: String, password: String, completion: @escaping (Bool) -> Void) {
         
         let loginRequest =  LoginRequest(grant_type: "password", email: email, password: password, client_id: self.client_id, client_secret: self.client_secret)
         
-        manager.request(URL_LOGIN, method: .post, parameters: loginRequest.toDictonary(), encoding: JSONEncoding.default).responseJSON { (response) in
+        AF.request(URL_LOGIN, method: .post, parameters: loginRequest.toDictonary(), encoding: JSONEncoding.default).responseJSON { (response) in
             let statusCode = response.response?.statusCode
             switch response.result {
             case .success(let value):
