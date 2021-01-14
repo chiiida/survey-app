@@ -14,7 +14,7 @@ $ pod install
 ## Test
 To run the test using Fastlane, run this command:
 ```
-$ fastlane ios allTests
+$ fastlane ios all_tests
 ```
 ## Author
 - Chananchida Fuachai
