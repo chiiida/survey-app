@@ -14,26 +14,24 @@ class SurveyDetailViewController: UIViewController {
     var maskingView: UIView!
     var bgImageView: UIImageView!
     
-    lazy var titleLabel: UILabel = {
+    var titleLabel: UILabel = {
         let titleLabel = UILabel(frame: CGRect(x: 20, y: 100, width: UIScreen.main.bounds.width - 20, height: 40))
         titleLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
-        titleLabel.text = survey.title
         titleLabel.textColor = .white
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.numberOfLines = 2
         return titleLabel
     }()
 
-    lazy var descriptionLabel: UILabel = {
+    var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel(frame: CGRect(x: 20, y: 140, width: UIScreen.main.bounds.width - 20, height: 50))
-        descriptionLabel.text = survey.description
         descriptionLabel.textColor = LIGHT_GRAY
         descriptionLabel.font = UIFont.systemFont(ofSize: 16.0)
         descriptionLabel.numberOfLines = 2
         return descriptionLabel
     }()
     
-    lazy var startSurveyBtn: UIButton = {
+    var startSurveyBtn: UIButton = {
         let startSurveyBtn = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 150 , y: UIScreen.main.bounds.height - 100, width: 130, height: 50))
         startSurveyBtn.setTitle("Start Survey", for: .normal)
         startSurveyBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
@@ -71,5 +69,12 @@ class SurveyDetailViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
         view.addSubview(startSurveyBtn)
+        
+        setUpText()
+    }
+    
+    func setUpText() {
+        titleLabel.text = survey.title
+        descriptionLabel.text = survey.description
     }
 }
