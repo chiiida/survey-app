@@ -7,30 +7,30 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
 
 class BaseService: NSObject {
 
-    func callWebServiceAlamofire(_ alamoReq: AlamofireRequestModal, success: @escaping ((_ responseObject: AnyObject?) -> Void), failure: @escaping ((_ error: NSError?) -> Void)) {
+    func callWebServiceAlamofire<T: Decodable>(_ alamoReq: AlamofireRequestModal, decodableModel: T.Type, success: @escaping ((_ responseObject: AnyObject?) -> Void), failure: @escaping ((_ error: NSError?) -> Void)) {
 
         let req = AF.request(alamoReq.path, method: alamoReq.method, parameters: alamoReq.parameters, encoding: alamoReq.encoding, headers: alamoReq.headers)
 
-        req.validate(statusCode: 200..<600).responseJSON(completionHandler: { response in
+        req.validate(statusCode: 200..<600).responseDecodable(of: decodableModel) { (response) in
             let statusCode = response.response?.statusCode
 
             switch response.result {
-            case .success(let data):
+            case .success:
 
                 if statusCode == 200 {
+                    guard let data = response.value else { return }
                     success(data as AnyObject?)
                 } else if statusCode == 401 {
                     // Unauthorized or access token expire
-                    self.requestForRefreshToken(alaomReq: alamoReq, success: success, failure: failure)
+                    self.requestForRefreshToken(alaomReq: alamoReq, decodableModel: decodableModel, success: success, failure: failure)
                 }
             case .failure(let error):
                 failure(error as NSError?)
             }
-        })
+        }
     }
 
 }
@@ -46,7 +46,7 @@ extension BaseService {
     }
 
     // MARK: - API CALL
-    func requestForRefreshToken(alaomReq: AlamofireRequestModal, success: @escaping ((_ responseObject: AnyObject?) -> Void), failure: @escaping ((_ error: NSError?) -> Void) ) {
+    func requestForRefreshToken<T: Decodable>(alaomReq: AlamofireRequestModal, decodableModel: T.Type, success: @escaping ((_ responseObject: AnyObject?) -> Void), failure: @escaping ((_ error: NSError?) -> Void) ) {
         
         let client_id = ProcessInfo.processInfo.environment["client_id"]!
         let client_secret = ProcessInfo.processInfo.environment["client_secret"]!
@@ -59,13 +59,13 @@ extension BaseService {
             "client_secret": client_secret
         ]
         
-        AF.request(URL_LOGIN, method: .post, parameters: reqBody as Parameters, encoding: JSONEncoding.default).responseJSON { (response) in
+        AF.request(URL_LOGIN, method: .post, parameters: reqBody as Parameters, encoding: JSONEncoding.default).responseDecodable(of: AuthResponse.self) { (response) in
             switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                let userTokenType = json["data"]["attributes"]["token_type"].stringValue
-                let accessToken = json["data"]["attributes"]["access_token"].stringValue
-                let refreshToken = json["data"]["attributes"]["refresh_token"].stringValue
+            case .success:
+                guard let user = response.value else { return }
+                let userTokenType = user.data.attributes.token_type
+                let accessToken = user.data.attributes.access_token
+                let refreshToken = user.data.attributes.refresh_token
                 UserDefaults.standard.setValue(userTokenType, forKeyPath: "user_token_type")
                 UserDefaults.standard.setValue(accessToken, forKeyPath: "access_token")
                 UserDefaults.standard.setValue(refreshToken, forKeyPath: "refresh_token")
@@ -77,7 +77,7 @@ extension BaseService {
         var request: AlamofireRequestModal = alaomReq
         request.headers = ["Authorization": self.getAccessToken()]
         
-        self.callWebServiceAlamofire(request, success: success, failure: failure)
+        self.callWebServiceAlamofire(request, decodableModel: decodableModel, success: success, failure: failure)
     }
 
 }

@@ -24,6 +24,7 @@
 		434EDF8625B81544008B2785 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434EDF8525B81544008B2785 /* UIImageView+Extensions.swift */; };
 		434EDF8A25B81559008B2785 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434EDF8925B81559008B2785 /* UITextField+Extensions.swift */; };
 		434EDF8E25B8156E008B2785 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434EDF8D25B8156E008B2785 /* UIView+Extensions.swift */; };
+		434EDF9625B82963008B2785 /* SurveyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434EDF9525B82963008B2785 /* SurveyResponse.swift */; };
 		4360728725A592DE0043F672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4360728625A592DE0043F672 /* AppDelegate.swift */; };
 		4360728925A592DE0043F672 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4360728825A592DE0043F672 /* SceneDelegate.swift */; };
 		4360728B25A592DE0043F672 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4360728A25A592DE0043F672 /* LoginScreenViewController.swift */; };
@@ -68,6 +69,7 @@
 		434EDF8525B81544008B2785 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		434EDF8925B81559008B2785 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		434EDF8D25B8156E008B2785 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		434EDF9525B82963008B2785 /* SurveyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyResponse.swift; sourceTree = "<group>"; };
 		4360728325A592DE0043F672 /* SurveyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SurveyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4360728625A592DE0043F672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4360728825A592DE0043F672 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			children = (
 				4347C95225A60284004F6E68 /* User.swift */,
 				43E3D02E25A70B3500F7F9C9 /* Survey.swift */,
+				434EDF9525B82963008B2785 /* SurveyResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				434482E225AE041E004D660E /* AlamofireRequestModal.swift in Sources */,
 				434EDF7425B814EC008B2785 /* Encodable+Extensions.swift in Sources */,
 				43E3D02F25A70B3500F7F9C9 /* Survey.swift in Sources */,
+				434EDF9625B82963008B2785 /* SurveyResponse.swift in Sources */,
 				43E3D02925A7052700F7F9C9 /* SurveyCardView.swift in Sources */,
 				434EDF7E25B81519008B2785 /* UIButton+Extensions.swift in Sources */,
 				434EDF8A25B81559008B2785 /* UITextField+Extensions.swift in Sources */,

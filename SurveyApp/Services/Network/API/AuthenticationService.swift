@@ -7,7 +7,6 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
 
 class AuthenticationService: BaseService {
     
@@ -19,25 +18,26 @@ class AuthenticationService: BaseService {
         
         let loginRequest =  LoginRequest(grant_type: "password", email: email, password: password, client_id: self.client_id, client_secret: self.client_secret)
         
-        AF.request(URL_LOGIN, method: .post, parameters: loginRequest.toDictonary(), encoding: JSONEncoding.default).responseJSON { (response) in
-            let statusCode = response.response?.statusCode
-            switch response.result {
-            case .success(let value):
-                if statusCode == 200 {
-                    let json = JSON(value)
-                    let userTokenType = json["data"]["attributes"]["token_type"].stringValue
-                    let accessToken = json["data"]["attributes"]["access_token"].stringValue
-                    let refreshToken = json["data"]["attributes"]["refresh_token"].stringValue
-                    UserDefaults.standard.setValue(userTokenType, forKeyPath: "user_token_type")
-                    UserDefaults.standard.setValue(accessToken, forKeyPath: "access_token")
-                    UserDefaults.standard.setValue(refreshToken, forKeyPath: "refresh_token")
-                    completion(true)
+        AF.request(URL_LOGIN, method: .post, parameters: loginRequest.toDictonary(), encoding: JSONEncoding.default).responseDecodable(of: AuthResponse.self) { (response) in
+                let statusCode = response.response?.statusCode
+                switch response.result {
+                case .success:
+                    if statusCode == 200 {
+                        guard let user = response.value else { return }
+                        let userTokenType = user.data.attributes.token_type
+                        let accessToken = user.data.attributes.access_token
+                        let refreshToken = user.data.attributes.refresh_token
+                        UserDefaults.standard.setValue(userTokenType, forKeyPath: "user_token_type")
+                        UserDefaults.standard.setValue(accessToken, forKeyPath: "access_token")
+                        UserDefaults.standard.setValue(refreshToken, forKeyPath: "refresh_token")
+                        completion(true)
+                    }
+                case .failure(let error):
+                    completion(false)
+                    debugPrint(error)
                 }
-            case .failure(let error):
-                completion(false)
-                debugPrint(error)
+                
             }
-        }
     }
     
     func logOut(completion: @escaping (Bool) -> Void) {
