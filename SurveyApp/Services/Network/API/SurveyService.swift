@@ -23,16 +23,15 @@ class SurveyService: BaseService {
             request.method = .get
             request.path = URL_SURVEY_LIST
             request.headers = ["Authorization": getAccessToken()]
+            request.encoding = JSONEncoding.default
         
-        self.callWebServiceAlamofire(request, success: { (response) in
-            let json = JSON(response!)
-            let data = json["data"].arrayValue
-            for item in data {
-                let id = item["id"].stringValue
-                let attributes = item["attributes"]
-                let title = attributes["title"].stringValue
-                let desctiption = attributes["description"].stringValue
-                let url = "\(attributes["cover_image_url"].stringValue)l"
+        self.callWebServiceAlamofire(request, decodableModel: SurveyResponse.self, success: { (response) in
+            guard let surveyResponse = response as? SurveyResponse else { return }
+            for item in surveyResponse.data {
+                let id = item.id
+                let title = item.attributes.title
+                let desctiption = item.attributes.description
+                let url = "\(item.attributes.cover_image_url)l"
 
                 let survey = Survey(id: id, title: title, description: desctiption, cover_image_url: url)
                 surveys.append(survey)
