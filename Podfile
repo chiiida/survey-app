@@ -7,7 +7,6 @@ target 'SurveyApp' do
 
   # Pods for SurveyApp
   pod 'Alamofire', '~> 5.2'
-  pod 'SwiftyJSON'
   pod 'SkeletonView'
 end
 

@@ -7,7 +7,6 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
 
 class BaseService: NSObject {
 
@@ -16,7 +15,6 @@ class BaseService: NSObject {
         let req = AF.request(alamoReq.path, method: alamoReq.method, parameters: alamoReq.parameters, encoding: alamoReq.encoding, headers: alamoReq.headers)
 
         req.validate(statusCode: 200..<600).responseDecodable(of: decodableModel) { (response) in
-            print(response)
             let statusCode = response.response?.statusCode
 
             switch response.result {
