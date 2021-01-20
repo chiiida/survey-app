@@ -40,14 +40,22 @@ class LoginScreenViewController: UIViewController {
         setUpLayout()
         setUpText()
         setUpColor()
+        setUpTextField()
+        setUpImage()
+        setUpButton()
         setUpConstraint()
     }
     
     func setUpText() {
         emailField.placeholder = "Email"
+        emailField.font = UIFont.systemFont(ofSize: 15)
+        
         passwordField.placeholder = "Password"
+        passwordField.font = UIFont.systemFont(ofSize: 15)
+        
         loginBtn.setTitle("Log in", for: .normal)
         loginBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        
         forgotBtn.setTitle("Forgot?", for: .normal)
     }
     
@@ -65,23 +73,8 @@ class LoginScreenViewController: UIViewController {
         forgotBtn.backgroundColor = DARK_GRAY
     }
     
-    func setUpLayout() {
-        bgImageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        bgImageView.image = UIImage(named: "Overlay-bg")
-        
-        overlayView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        overlayView.image = UIImage(named: "Overlay")
-        
-        let logoImage = UIImage(named: "Logo White")
-        logoImageView.frame = CGRect(x: 50, y: 110, width: 180, height: 180)
-        logoImageView.image = logoImage
-        logoImageView.contentMode = UIView.ContentMode.scaleAspectFit
-        logoImageView.center.x = view.center.x
-    
-        emailField.frame = CGRect(x: 50, y: 350, width: UIScreen.main.bounds.width - 50, height: 50.0)
-        emailField.center.x = view.center.x
+    func setUpTextField() {
         emailField.layer.cornerRadius = 10.0
-        emailField.font = UIFont.systemFont(ofSize: 15)
         emailField.borderStyle = UITextField.BorderStyle.roundedRect
         emailField.autocorrectionType = UITextAutocorrectionType.no
         emailField.keyboardType = UIKeyboardType.default
@@ -93,27 +86,53 @@ class LoginScreenViewController: UIViewController {
         emailField.keyboardType = UIKeyboardType.emailAddress
         emailField.delegate = self
         
-        passwordField.frame = CGRect(x: 50, y: 420, width: UIScreen.main.bounds.width - 50, height: 50.0)
         passwordField.layer.cornerRadius = 10.0
-        passwordField.center.x = view.center.x
-        passwordField.font = UIFont.systemFont(ofSize: 15)
         passwordField.borderStyle = UITextField.BorderStyle.roundedRect
         passwordField.autocorrectionType = UITextAutocorrectionType.no
         passwordField.keyboardType = UIKeyboardType.default
         passwordField.returnKeyType = UIReturnKeyType.done
         passwordField.clearButtonMode = UITextField.ViewMode.whileEditing
         passwordField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-        passwordField.delegate = self
         passwordField.tag = 2
         passwordField.isSecureTextEntry = true
+        passwordField.delegate = self
+    }
+    
+    func setUpImage() {
+        bgImageView.image = UIImage(named: "Overlay-bg")
+        
+        overlayView.image = UIImage(named: "Overlay")
+        
+        let logoImage = UIImage(named: "Logo White")
+        logoImageView.image = logoImage
+    }
+    
+    func setUpButton() {
+        forgotBtn.addCorners(radius: 10.0)
+        
+        loginBtn.addCorners(radius: 10.0)
+        loginBtn.addTarget(self, action: #selector(loginBtnWasTapped), for: .touchUpInside)
+    }
+    
+    func setUpLayout() {
+        bgImageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        
+        overlayView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        
+        emailField.frame = CGRect(x: 50, y: 350, width: UIScreen.main.bounds.width - 50, height: 50.0)
+        emailField.center.x = view.center.x
+        
+        passwordField.frame = CGRect(x: 50, y: 420, width: UIScreen.main.bounds.width - 50, height: 50.0)
+        passwordField.center.x = view.center.x
+        
+        logoImageView.frame = CGRect(x: 50, y: 110, width: 180, height: 180)
+        logoImageView.contentMode = UIView.ContentMode.scaleAspectFit
+        logoImageView.center.x = view.center.x
         
         forgotBtn.frame = CGRect(x: UIScreen.main.bounds.width - 95, y: 420, width: 70, height: 50.0)
-        forgotBtn.addCorners(radius: 10.0)
         
         loginBtn.frame = CGRect(x: 50, y: 490, width: UIScreen.main.bounds.width - 50 , height: 50.0)
         loginBtn.center.x = view.center.x
-        loginBtn.addCorners(radius: 10.0)
-        loginBtn.addTarget(self, action: #selector(loginBtnWasTapped), for: .touchUpInside)
     }
     
     func setUpConstraint() {

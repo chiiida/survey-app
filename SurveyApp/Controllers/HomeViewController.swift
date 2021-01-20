@@ -71,13 +71,28 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func setUpView() {
+        view.addSubview(scrollView)
+        view.addSubview(pageControl)
+        view.addSubview(userProfileView)
+        view.addSubview(dateLabel)
+        view.addSubview(dayLabel)
+
+        setUpScrollView()
+        setUpLayout()
+        setUpSkeleton()
+        setUpAction()
+    }
+    
+    func setUpScrollView() {
         scrollView.frame = view.bounds
         scrollView.isPagingEnabled = true
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.bounds = UIScreen.main.bounds
         scrollView.delegate = self
-        
+    }
+    
+    func setUpLayout() {
         pageControl.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 240, width: UIScreen.main.bounds.width, height: 50)
         pageControl.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
         
@@ -87,18 +102,6 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         dateLabel.frame = CGRect(x: 20, y: 60, width: 130, height: 5)
         
         dayLabel.frame = CGRect(x: 20, y: 90, width: 110, height: 5)
-        
-        view.addSubview(scrollView)
-        view.addSubview(pageControl)
-        view.addSubview(userProfileView)
-        view.addSubview(dateLabel)
-        view.addSubview(dayLabel)
-
-        setUpSkeleton()
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(userProfileTapped(tapGestureRecognizer:)))
-        userProfileView.isUserInteractionEnabled = true
-        userProfileView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     func updateView() {
@@ -123,6 +126,12 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         
         dayLabel.isSkeletonable = true
         dayLabel.linesCornerRadius = 10
+    }
+    
+    func setUpAction() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(userProfileTapped(tapGestureRecognizer:)))
+        userProfileView.isUserInteractionEnabled = true
+        userProfileView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     func showLoadingAnimation() {
