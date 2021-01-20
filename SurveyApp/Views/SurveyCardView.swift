@@ -11,40 +11,36 @@ import SkeletonView
 class SurveyCardView: UIView {
     var survey: Survey!
     
-    lazy var maskingView: UIView = {
+    var maskingView: UIView = {
         let splashView = UIView()
         splashView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         return splashView
     }()
     
-    lazy var bgImageView: UIImageView = {
+    var bgImageView: UIImageView = {
         let bgImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        let url = URL(string: survey.cover_image_url)!
-        bgImageView.loadUrl(url: url)
         return bgImageView
     }()
     
-    lazy var titleLabel: UILabel = {
+    var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = survey.title
         titleLabel.textColor = .white
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.numberOfLines = 2
         return titleLabel
     }()
 
-    lazy var descriptionLabel: UILabel = {
+    var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.text = survey.description
         descriptionLabel.textColor = LIGHT_GRAY
         descriptionLabel.font = UIFont.systemFont(ofSize: 16.0)
         descriptionLabel.numberOfLines = 2
         return descriptionLabel
     }()
     
-    lazy var surveyDetailBtn: UIButton = {
+    var surveyDetailBtn: UIButton = {
         let takeSurveyBtn = UIButton()
         takeSurveyBtn.setImage(UIImage(named: "arrow"), for: .normal)
         takeSurveyBtn.imageView?.contentMode = .scaleAspectFit
@@ -74,9 +70,21 @@ class SurveyCardView: UIView {
         addSubview(descriptionLabel)
         addSubview(surveyDetailBtn)
         
+        setUpText()
+        setUpImage()
         setUpLayout()
         setUpSkeleton()
         setUpActions()
+    }
+    
+    func setUpText() {
+        titleLabel.text = survey.title
+        descriptionLabel.text = survey.description
+    }
+    
+    func setUpImage() {
+        let url = URL(string: survey.cover_image_url)!
+        bgImageView.loadUrl(url: url)
     }
     
     func setUpLayout() {

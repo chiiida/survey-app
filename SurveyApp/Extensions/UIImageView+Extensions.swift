@@ -4,7 +4,6 @@
 //
 //  Created by Chananchida Fuachai on 7/1/2564 BE.
 //
-
 import UIKit
 
 let imageCache = NSCache<NSString, AnyObject>()
